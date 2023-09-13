@@ -94,8 +94,50 @@ exports.user_delete_post = asyncHandler(async (req, res, next) => {
     });
   }
 
+  jwt.verify(req.token, process.env.REFRESH_KEY, async (err, authData) => {
+    if (err) {
+      res.sendStatus(403);
+    } else {
+      await User.findByIdAndRemove(req.params.id);
+      return res.status(200).json({
+        message: "Success! User deleted.",
+        authData,
+      });
+    }
+  });
+
   await User.findByIdAndRemove(req.params.id);
   res.status(200).json({
     message: "Success! User deleted.",
   });
+});
+
+exports.user_login_post = asyncHandler(async (req, res, next) => {
+  const user = await User.find(
+    { username: req.body.username },
+    "username"
+  ).exec();
+
+  if (user === null) {
+    return res.status(400).json({
+      message: "User does not exist!",
+    });
+  }
+
+  jwt.sign(
+    { user: user },
+    process.env.REFRESH_KEY,
+    { expiresIn: "5m" },
+    (err, token) => {
+      if (err) return next(err);
+
+      return res.status(200).json({
+        token,
+        user: {
+          username: user.username,
+        },
+        message: "Success! Logged in.",
+      });
+    }
+  );
 });
