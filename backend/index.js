@@ -1,10 +1,17 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
+const postRouter = require("./routes/posts");
+const commentRouter = require("./routes/comments");
+const userRouter = require("./routes/users");
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use("/post", postRouter);
+app.use("/comment", commentRouter);
+app.use("/user", userRouter);
 
 function verifyToken(req, res, next) {
   const bearerHeader = req.headers["authorization"];

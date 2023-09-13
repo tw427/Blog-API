@@ -6,12 +6,12 @@ router.get("/sign-up", ADD.CONTROLLER);
 router.post("/sign-up", ADD.CONTROLLER);
 
 // Delete User
-router.get("/delete/:id", ADD.CONTROLLER);
-router.post("/delete/:id", ADD.CONTROLLER);
+router.get("/delete/:userId", ADD.CONTROLLER);
+router.post("/delete/:userId", ADD.CONTROLLER);
 
 // Update User
-router.get("/update/:id", ADD.CONTROLLER);
-router.post("/update/:id", ADD.CONTROLLER);
+router.get("/update/:userId", ADD.CONTROLLER);
+router.post("/update/:userId", ADD.CONTROLLER);
 
 // Get a list of Users
 router.get("/list", ADD.CONTROLLER);
