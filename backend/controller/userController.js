@@ -84,3 +84,18 @@ exports.user_create_post = [
     });
   }),
 ];
+
+exports.user_delete_post = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.params.id).exec();
+
+  if (user === null) {
+    return res.status(400).json({
+      message: "User does not exist!",
+    });
+  }
+
+  await User.findByIdAndRemove(req.params.id);
+  res.status(200).json({
+    message: "Success! User deleted.",
+  });
+});
