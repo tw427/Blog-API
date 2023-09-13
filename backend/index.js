@@ -63,9 +63,9 @@ app.use(passport.session());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/post", postRouter);
-app.use("/comment", commentRouter);
-app.use("/user", userRouter);
+app.use("/api/post", postRouter);
+app.use("/api/:postId/comments", commentRouter);
+app.use("/api/user", userRouter);
 
 app.listen(3000, () => console.log("Server started on 3000"));
 

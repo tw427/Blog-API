@@ -7,9 +7,7 @@ const asyncHandler = require("express-async-handler");
 exports.user_list_get = asyncHandler(async (req, res, next) => {
   const userList = await User.find({}, "username").sort({ username: 1 }).exec();
 
-  res.json({
-    user_list: userList,
-  });
+  res.json(userList);
 });
 
 exports.user_create_post = [
