@@ -1,0 +1,6 @@
+#cms-home {
+  display: grid;
+  grid-template: 1fr 9fr / 1fr;
+  height: 100vh;
+  margin: 0 240px;
+}
