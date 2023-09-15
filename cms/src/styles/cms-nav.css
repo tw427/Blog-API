@@ -3,7 +3,6 @@
   justify-content: center;
   gap: 24px;
   align-items: center;
-  margin-top: 100px;
 }
 
 .cms-button {
@@ -23,13 +22,14 @@
   color: rgb(173, 173, 173);
 }
 
-.cms-active:focus {
-  animation: pulse 1s;
-}
 
 .cms-active {
   background-color: rgb(253, 208, 80);
   color: rgb(7, 34, 67);
+}
+
+.cms-active:focus {
+  animation: pulse 1s;
 }
 
 #cms-nav button:hover {

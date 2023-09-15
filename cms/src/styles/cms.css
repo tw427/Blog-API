@@ -4,7 +4,13 @@ body {
 
 #cms-home {
   display: grid;
-  grid-template: 1fr 9fr / 1fr;
+  grid-template: 1fr 1fr 9fr / 1fr;
   height: 100vh;
   margin: 0 240px;
+}
+
+h1 {
+  color: rgb(32, 32, 32);
+  text-align: center;
+  margin-top: 64px;
 }
