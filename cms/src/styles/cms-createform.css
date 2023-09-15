@@ -1,0 +1,57 @@
+#post-form {
+  display: flex;
+  flex-direction: column;
+}
+
+#post-title {
+  font-size: 18px;
+  height: 32px;
+}
+
+#post-body {
+  font-size: 16px;
+  margin-top: 12px;
+  height: 340px;
+  resize: none;
+}
+
+#post-title,
+#post-body {
+  padding: 6px;
+  width: 636px;
+  border: none;
+  border-radius: 12px;
+}
+
+#post-title:focus,
+#post-body:focus {
+  outline: none;
+}
+
+#post-form-btns {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 12px;
+}
+
+#postBtn,
+#clearBtn {
+  background-color: rgb(111, 223, 160);
+  color: rgb(255, 255, 255);
+  
+  font-weight: 700;
+  font-size: 18px;
+
+  width: 128px;
+  height: 34px;
+  
+  border-radius: 14px;
+  border: none;
+}
+
+#postBtn:hover,
+#clearBtn:hover {
+  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+  color: rgb(111, 223, 160);
+}
