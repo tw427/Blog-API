@@ -1,6 +1,18 @@
+import PropTypes from "prop-types";
 import "../styles/cms-nav.css";
 
-const CmsNav = () => {
+export const CmsNav = (props) => {
+  const { setCurrView } = props;
+
+  CmsNav.propTypes = {
+    setCurrView: PropTypes.func,
+  };
+
+  function handleClick(btn, currView) {
+    setCurrView(`${currView}`);
+    changeBtnState(btn);
+  }
+
   function changeBtnState(btn) {
     btn.preventDefault();
     if (btn.target.className.includes("cms-active")) {
@@ -18,33 +30,31 @@ const CmsNav = () => {
       <button
         id="cms-create"
         className="cms-button cms-active"
-        onClick={(btn) => changeBtnState(btn)}
+        onClick={(btn) => handleClick(btn, "create")}
       >
         Create
       </button>
       <button
         id="cms-delete"
         className="cms-button cms-inactive"
-        onClick={(btn) => changeBtnState(btn)}
+        onClick={(btn) => handleClick(btn, "delete")}
       >
         Delete
       </button>
       <button
         id="cms-update"
         className="cms-button cms-inactive"
-        onClick={(btn) => changeBtnState(btn)}
+        onClick={(btn) => handleClick(btn, "update")}
       >
         Update
       </button>
       <button
         id="cms-view-all"
         className="cms-button cms-inactive"
-        onClick={(btn) => changeBtnState(btn)}
+        onClick={(btn) => handleClick(btn, "viewAll")}
       >
         View Posts
       </button>
     </nav>
   );
 };
-
-export default CmsNav;
