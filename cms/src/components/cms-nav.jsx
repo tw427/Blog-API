@@ -2,6 +2,7 @@ import "../styles/cms-nav.css";
 
 const CmsNav = () => {
   function changeBtnState(btn) {
+    btn.preventDefault();
     if (btn.target.className.includes("cms-active")) {
       return;
     }
