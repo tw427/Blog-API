@@ -22,6 +22,8 @@ async function main() {
 }
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 passport.use(
@@ -64,8 +66,6 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/post", postRouter);
 // app.use("/api/:postId/comments", commentRouter);

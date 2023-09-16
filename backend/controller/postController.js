@@ -30,10 +30,10 @@ exports.post_create_post = [
     });
 
     if (!errors.isEmpty()) {
-      return res.json({ error: errors.array() });
+      console.log(errors.array());
     } else {
-      await post.save();
-      res.redirect(req.url);
+      console.log("ITS WORKING");
+      res.status(200).json();
     }
   }),
 ];

@@ -1,6 +1,14 @@
 #cms-view {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   margin-top: 12px;
   width: 100%;
+}
+
+#cms-view span {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: rgb(8, 8, 8);
+  font-weight: 500;
 }

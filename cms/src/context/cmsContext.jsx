@@ -5,6 +5,7 @@ export const CmsContext = createContext();
 const CmsContextProvider = () => {
   const [currView, setCurrView] = useState("create");
   const [allPosts, setAllPosts] = useState({});
+  const [fetchStatus, setFetchStatus] = useState("");
 
   return (
     <CmsContext.Provider
@@ -13,6 +14,8 @@ const CmsContextProvider = () => {
         setCurrView: setCurrView,
         allPosts: allPosts,
         setAllPosts: setAllPosts,
+        fetchStatus: fetchStatus,
+        setFetchStatus: setFetchStatus,
       }}
     >
       <CMS />
