@@ -1,6 +1,7 @@
+require("dotenv").config();
 const express = require("express");
-const jwt = require("jsonwebtoken");
 const session = require("express-session");
+const cors = require("cors");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const mongoose = require("mongoose");
@@ -8,6 +9,8 @@ const User = require("./models/user");
 const postRouter = require("./routes/posts");
 const commentRouter = require("./routes/comments");
 const userRouter = require("./routes/users");
+
+const secretPhrase = process.env.REFRESH_KEY;
 
 mongoose.set("strictQuery", false);
 
@@ -19,6 +22,7 @@ async function main() {
 }
 
 const app = express();
+app.use(cors());
 
 passport.use(
   new LocalStrategy(async (username, passport, done) => {
@@ -53,7 +57,7 @@ passport.deserializeUser(async function (id, done) {
 
 app.use(
   session({
-    secret: process.env.REFRESH_KEY,
+    secret: secretPhrase,
     resave: false,
     saveUninitialized: true,
   })
@@ -64,8 +68,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/post", postRouter);
-app.use("/api/:postId/comments", commentRouter);
-app.use("/api/user", userRouter);
+// app.use("/api/:postId/comments", commentRouter);
+// app.use("/api/user", userRouter);
 
 app.listen(3000, () => console.log("Server started on 3000"));
 

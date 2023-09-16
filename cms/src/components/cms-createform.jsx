@@ -1,27 +1,50 @@
 import "../styles/cms-createform.css";
 
 const CmsCreate = () => {
+  async function createPost() {
+    await fetch("http://localhost:3000/api/post/create", {
+      method: "POST",
+      mode: "cors",
+      url: "http://localhost:3000",
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          console.log(res.json());
+          return res.json();
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+  // onClick={() => createPost()}
+
   return (
-    <form id="post-form">
-      <label htmlFor="post-title">
+    <form
+      id="post-form"
+      action="http://localhost:3000/api/post/create"
+      method="POST"
+    >
+      <label htmlFor="postTitle">
         <input
-          id="post-title"
-          name="post-title"
+          id="postTitle"
+          name="postTitle"
           type="text"
           placeholder="Title of post"
+          minLength={4}
         ></input>
       </label>
-      <label htmlFor="post-body">
+      <label htmlFor="postBody">
         <textarea
-          id="post-body"
-          name="post-body"
+          id="postBody"
+          name="postBody"
           placeholder="(Max chars. 427)"
-          minLength={25}
+          minLength={4}
           maxLength={427}
         ></textarea>
       </label>
       <div id="post-form-btns">
-        <button id="postBtn">Post</button>
+        <button id="postBtn" type="submit">
+          Post
+        </button>
         <button id="clearBtn">Clear</button>
       </div>
     </form>
