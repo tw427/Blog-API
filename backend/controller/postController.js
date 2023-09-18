@@ -32,7 +32,7 @@ exports.post_create_post = [
     if (!errors.isEmpty()) {
       console.log(errors.array());
     } else {
-      console.log("ITS WORKING");
+      await post.save();
       res.status(200).json();
     }
   }),

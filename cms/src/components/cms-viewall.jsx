@@ -22,10 +22,21 @@ export const CmsViewAll = () => {
     const posts = [];
 
     allPosts.forEach((post) => {
+      let trimBody = post.body;
+      let trimTitle = post.title;
+      if (post.body.length > 27) {
+        trimBody = post.body.substr(0, 27) + "...";
+      }
+
+      if (post.title.length > 12) {
+        trimTitle = post.title.substr(0, 12) + "...";
+      }
       posts.push(
         <div className="post-view-card" key={post._id}>
-          <div className="post-view-title">{post.title}</div>
-          <div className="post-view-body">{post.body}</div>
+          <div className="post-view-title">{trimTitle}</div>
+          <hr></hr>
+          <div className="post-view-body">{trimBody}</div>
+          <button className="post-link-button">View Post</button>
         </div>
       );
     });

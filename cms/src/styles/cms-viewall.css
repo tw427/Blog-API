@@ -1,6 +1,46 @@
-.viewall-test {
-  width: 646px;
-  height: 40px;
-  background-color: black;
-  margin-top: 12px;
+#viewall-main {
+  display: grid;
+  grid-template: auto / repeat(4, 1fr);
+  width: 100%;
+  justify-items: center;
+}
+
+.post-view-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  font-size: 20px;
+  color: rgb(0, 92, 134);
+  padding: 12px;
+  margin: 12px;
+
+  background: white;
+  border-radius: 12px;
+  
+  height: 123px;
+  width: 272px;
+  box-shadow: 0px 0px 10px rgb(182, 182, 182);
+}
+
+.post-view-card hr {
+  width: 100%;
+}
+
+.post-link-button {
+  height: 38px;
+  width: 80px;
+
+  font-weight: 600;
+  background-color: rgb(55, 148, 255);
+  color: white;
+  margin-top: 20px;
+
+  border: none;
+  border-radius: 8px;
+}
+
+.post-link-button:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 6px rgb(131, 131, 131);
 }
