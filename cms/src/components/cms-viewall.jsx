@@ -16,16 +16,14 @@ export const CmsViewAll = () => {
       setAllPosts(results);
     }
     fetchPosts();
-  }, []);
-
-  console.log(allPosts);
+  }, [setAllPosts]);
 
   function renderPosts() {
     const posts = [];
 
     allPosts.forEach((post) => {
       posts.push(
-        <div className="post-view-card">
+        <div className="post-view-card" key={post._id}>
           <div className="post-view-title">{post.title}</div>
           <div className="post-view-body">{post.body}</div>
         </div>
@@ -35,5 +33,5 @@ export const CmsViewAll = () => {
     return posts;
   }
 
-  return <main id="viewall-main">{renderPosts}</main>;
+  return <main id="viewall-main">{renderPosts()}</main>;
 };

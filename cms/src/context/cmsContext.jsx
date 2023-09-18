@@ -4,7 +4,7 @@ export const CmsContext = createContext();
 
 const CmsContextProvider = () => {
   const [currView, setCurrView] = useState("create");
-  const [allPosts, setAllPosts] = useState({});
+  const [allPosts, setAllPosts] = useState([]);
   const [fetchStatus, setFetchStatus] = useState("");
 
   return (
