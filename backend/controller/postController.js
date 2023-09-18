@@ -4,7 +4,7 @@ const asyncHandler = require("express-async-handler");
 
 // Get a list of Posts
 exports.post_list_get = asyncHandler(async (req, res, next) => {
-  const allPosts = Post.find({}).exec();
+  const allPosts = await Post.find({}).exec();
 
   return res.json(allPosts);
 });
