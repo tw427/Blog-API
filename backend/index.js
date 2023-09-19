@@ -77,7 +77,7 @@ app.get("/api", (req, res, next) => {
 
 app.use("/api/post", postRouter);
 // app.use("/api/:postId/comments", commentRouter);
-// app.use("/api/user", userRouter);
+app.use("/api/user", userRouter);
 
 app.listen(3000, () => console.log("Server started on 3000"));
 

@@ -112,7 +112,7 @@ exports.user_delete_post = asyncHandler(async (req, res, next) => {
 
 exports.user_login_post = asyncHandler(async (req, res, next) => {
   const user = await User.find(
-    { username: req.body.username },
+    { username: req.body.cmsUsername },
     "username"
   ).exec();
 
@@ -125,15 +125,13 @@ exports.user_login_post = asyncHandler(async (req, res, next) => {
   jwt.sign(
     { user: user },
     process.env.REFRESH_KEY,
-    { expiresIn: "5m" },
+    { expiresIn: "1m" },
     (err, token) => {
       if (err) return next(err);
 
       return res.status(200).json({
         token,
-        user: {
-          username: user.username,
-        },
+        user: user,
         message: "Success! Logged in.",
       });
     }
