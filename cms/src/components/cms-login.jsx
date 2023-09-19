@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../styles/cms-login.css";
 
 export const CmsLogin = () => {
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    if (user) {
+      console.log(user.user[0].username);
+    }
+  }, [user]);
 
   async function loginAPI(event) {
     event.preventDefault();
@@ -20,27 +26,28 @@ export const CmsLogin = () => {
       if (response.status === 200) {
         setUser(results);
         console.log(results);
+        return;
       }
     } catch (err) {
-      console.log(err);
+      console.log("Bad Login!");
     }
   }
 
   return (
     <form id="cms-login-form" onSubmit={(e) => loginAPI(e)}>
-      <label htmlFor="cmsUsername">
+      <label htmlFor="username">
         <input
           type="text"
-          id="cmsUsername"
-          name="cmsUsername"
+          id="username"
+          name="username"
           placeholder="Username"
         />
       </label>
-      <label htmlFor="cmsPassword">
+      <label htmlFor="password">
         <input
           type="password"
-          id="cmsPassword"
-          name="cmsPassword"
+          id="password"
+          name="password"
           placeholder="Password"
         />
       </label>

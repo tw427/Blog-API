@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const passport = require("passport");
 const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 
@@ -112,7 +113,7 @@ exports.user_delete_post = asyncHandler(async (req, res, next) => {
 
 exports.user_login_post = asyncHandler(async (req, res, next) => {
   const user = await User.find(
-    { username: req.body.cmsUsername },
+    { username: req.body.username },
     "username"
   ).exec();
 

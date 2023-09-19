@@ -27,16 +27,20 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 passport.use(
-  new LocalStrategy(async (username, passport, done) => {
+  new LocalStrategy(async (username, password, done) => {
     try {
       const user = await User.findOne({ username: username });
-      const match = await bcrypt.compare(password, user.password);
+      // const match = await bcrypt.compare(password, user.password);
       if (!user) {
         return done(null, false, { message: "Incorrect username" });
       }
-      if (!match) {
+
+      if (user.password !== password) {
         return done(null, false, { message: "Incorrect password" });
       }
+      // if (!match) {
+      //   return done(null, false, { message: "Incorrect password" });
+      // }
       return done(null, user);
     } catch (err) {
       return done(err);
