@@ -67,6 +67,14 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.get("/api", (req, res, next) => {
+  if (req.user) {
+    return res.json(req.user);
+  }
+
+  return res.json("nouser");
+});
+
 app.use("/api/post", postRouter);
 // app.use("/api/:postId/comments", commentRouter);
 // app.use("/api/user", userRouter);

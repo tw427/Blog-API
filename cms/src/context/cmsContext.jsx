@@ -3,7 +3,7 @@ import { CMS } from "../components/cms";
 export const CmsContext = createContext();
 
 const CmsContextProvider = () => {
-  const [currView, setCurrView] = useState("create");
+  const [currView, setCurrView] = useState("login");
   const [allPosts, setAllPosts] = useState([]);
   const [fetchStatus, setFetchStatus] = useState("");
 
