@@ -1,7 +1,7 @@
 const express = require("express");
 
 exports.verifyToken = (req, res, next) => {
-  const bearerHeader = req.headers["authorization"];
+  const bearerHeader = req.headers.authorization;
 
   if (typeof bearerHeader !== "undefined") {
     // Split Bearer <access_token> at the space

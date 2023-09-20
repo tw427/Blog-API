@@ -6,30 +6,49 @@ export const CmsLogin = () => {
 
   useEffect(() => {
     if (user) {
-      console.log(user.user[0].username);
+      console.log(user.user.username);
     }
   }, [user]);
 
-  async function loginAPI(event) {
-    event.preventDefault();
+  async function testToken(e) {
+    e.preventDefault();
+
     try {
-      const formData = new FormData(document.getElementById("cms-login-form"));
-      const data = new URLSearchParams(formData);
-      const response = await fetch("http://localhost:3000/api/user/login", {
+      const response = await fetch("http://localhost:3000/api/user/delete", {
         method: "POST",
         mode: "cors",
-        body: data,
+        headers: {
+          authorization: `Bearer ${user.token}`,
+        },
       });
 
       const results = await response.json();
 
       if (response.status === 200) {
-        setUser(results);
         console.log(results);
         return;
       }
     } catch (err) {
-      console.log("Bad Login!");
+      console.log(err);
+    }
+  }
+
+  async function loginAPI(event) {
+    event.preventDefault();
+    const formData = new FormData(document.getElementById("cms-login-form"));
+    const data = new URLSearchParams(formData);
+    const response = await fetch("http://localhost:3000/api/user/login", {
+      method: "POST",
+      mode: "cors",
+      body: data,
+    });
+
+    const results = await response.json();
+
+    if (response.status === 200) {
+      setUser(results);
+      console.log(results);
+      return;
     }
   }
 
@@ -53,6 +72,9 @@ export const CmsLogin = () => {
       </label>
       <button type="submit" id="cms-login-btn">
         Login
+      </button>
+      <button id="cms-test-token" onClick={(e) => testToken(e)}>
+        Test Token
       </button>
     </form>
   );

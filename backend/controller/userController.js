@@ -1,7 +1,7 @@
+require("dotenv").config();
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const passport = require("passport");
 const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 
@@ -85,19 +85,20 @@ exports.user_create_post = [
 ];
 
 exports.user_delete_post = asyncHandler(async (req, res, next) => {
-  const user = await User.findById(req.params.id).exec();
+  // const user = await User.findById(req.params.id).exec();
 
-  if (user === null) {
-    return res.status(400).json({
-      message: "User does not exist!",
-    });
-  }
+  // if (user === null) {
+  //   return res.status(400).json({
+  //     message: "User does not exist!",
+  //   });
+  // }
 
-  jwt.verify(req.token, process.env.REFRESH_KEY, async (err, authData) => {
+  jwt.verify(req.token, process.env.REFRESH_KEY, (err, authData) => {
     if (err) {
+      console.log("hello");
       res.sendStatus(403);
     } else {
-      await User.findByIdAndRemove(req.params.id);
+      // await User.findByIdAndRemove(req.params.id);
       return res.status(200).json({
         message: "Success! User deleted.",
         authData,
@@ -105,22 +106,27 @@ exports.user_delete_post = asyncHandler(async (req, res, next) => {
     }
   });
 
-  await User.findByIdAndRemove(req.params.id);
-  res.status(200).json({
-    message: "Success! User deleted.",
-  });
+  // await User.findByIdAndRemove(req.params.id);
+  // res.status(200).json({
+  //   message: "Success! User deleted.",
+  // });
 });
 
 exports.user_login_post = asyncHandler(async (req, res, next) => {
-  const user = await User.find(
+  const { password } = req.body;
+  const user = await User.findOne(
     { username: req.body.username },
-    "username"
+    "username password"
   ).exec();
 
   if (user === null) {
-    return res.status(400).json({
-      message: "User does not exist!",
-    });
+    res.statusMessage = "User does not exist!";
+    return res.status(400).json({});
+  }
+
+  if (password !== user.password) {
+    res.statusMessage = "Incorrect password!";
+    return res.status(400).json({});
   }
 
   jwt.sign(

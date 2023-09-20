@@ -10,17 +10,10 @@ const { verifyToken } = require("../../utils/verifyToken");
 
 // // Delete User
 // router.get("/delete/:userId");
-// router.post("/delete/:userId", verifyToken, userController.user_delete_post);
+router.post("/delete", verifyToken, userController.user_delete_post);
 
 // Login
-router.post(
-  "/login",
-  passport.authenticate("local", {
-    session: true,
-  }),
-  userController.user_login_post
-);
-
+router.post("/login", userController.user_login_post);
 // // Get a list of Users
 // router.get("/list", userController.user_list_get);
 

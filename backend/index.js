@@ -3,12 +3,12 @@ const express = require("express");
 const session = require("express-session");
 const cors = require("cors");
 const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
 const mongoose = require("mongoose");
 const User = require("./models/user");
 const postRouter = require("./routes/posts");
 const commentRouter = require("./routes/comments");
 const userRouter = require("./routes/users");
+const jwtStrategy = require("./jwt");
 
 const secretPhrase = process.env.REFRESH_KEY;
 
@@ -26,27 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-passport.use(
-  new LocalStrategy(async (username, password, done) => {
-    try {
-      const user = await User.findOne({ username: username });
-      // const match = await bcrypt.compare(password, user.password);
-      if (!user) {
-        return done(null, false, { message: "Incorrect username" });
-      }
-
-      if (user.password !== password) {
-        return done(null, false, { message: "Incorrect password" });
-      }
-      // if (!match) {
-      //   return done(null, false, { message: "Incorrect password" });
-      // }
-      return done(null, user);
-    } catch (err) {
-      return done(err);
-    }
-  })
-);
+passport.use(jwtStrategy);
 
 passport.serializeUser(function (user, done) {
   done(null, user.id);
