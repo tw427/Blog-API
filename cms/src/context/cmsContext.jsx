@@ -6,6 +6,8 @@ const CmsContextProvider = () => {
   const [currView, setCurrView] = useState("login");
   const [allPosts, setAllPosts] = useState([]);
   const [fetchStatus, setFetchStatus] = useState("");
+  const [user, setUser] = useState();
+  const [loggedIn, setLoggedIn] = useState(false);
 
   return (
     <CmsContext.Provider
@@ -16,6 +18,10 @@ const CmsContextProvider = () => {
         setAllPosts: setAllPosts,
         fetchStatus: fetchStatus,
         setFetchStatus: setFetchStatus,
+        user: user,
+        setUser: setUser,
+        loggedIn: loggedIn,
+        setLoggedIn: setLoggedIn,
       }}
     >
       <CMS />

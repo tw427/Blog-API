@@ -92,7 +92,6 @@ exports.user_delete_post = asyncHandler(async (req, res, next) => {
   //     message: "User does not exist!",
   //   });
   // }
-
   jwt.verify(req.token, process.env.REFRESH_KEY, (err, authData) => {
     if (err) {
       res.sendStatus(403).json({ message: "Verification denied!" });
@@ -109,35 +108,4 @@ exports.user_delete_post = asyncHandler(async (req, res, next) => {
   // res.status(200).json({
   //   message: "Success! User deleted.",
   // });
-});
-
-exports.user_login_post = asyncHandler(async (req, res, next) => {
-  const { password } = req.body;
-  const user = await User.findOne(
-    { username: req.body.username },
-    "username password"
-  ).exec();
-
-  if (user === null) {
-    return res.status(400).json({ message: "User does not exist!" });
-  }
-
-  if (password !== user.password) {
-    return res.status(400).json({ message: "Incorrect password!" });
-  }
-
-  jwt.sign(
-    { user: user },
-    process.env.REFRESH_KEY,
-    { expiresIn: "60m" },
-    (err, token) => {
-      if (err) return next(err);
-
-      return res.status(200).json({
-        token,
-        user: user,
-        message: "Success! Logged in.",
-      });
-    }
-  );
 });

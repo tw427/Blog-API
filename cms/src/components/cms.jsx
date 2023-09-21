@@ -1,33 +1,24 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import "../styles/cms.css";
 import { CmsContext } from "../context/cmsContext";
 import { CmsNav } from "./cms-nav";
 import CmsView from "./cms-view";
 
 export const CMS = () => {
-  const { setCurrView } = useContext(CmsContext);
-  const { loggedIn, setLoggedIn } = useState(false);
+  const { setCurrView, user, loggedIn, setLoggedIn } = useContext(CmsContext);
 
   useEffect(() => {
-    // Hit our API's index route "/"
-    async function fetchIndex() {
-      const index = await fetch("http://localhost:3000/api/", {
-        method: "GET",
-        mode: "cors",
-      });
-
-      const results = await index.json();
-
-      if (results === "nouser") {
-        console.log("Not logged in");
-        console.log(results);
-        return;
-      }
-
+    // Maybe hit an API endpoint where it
+    // literally verifies the token and returns a 200 status or unauthorized status
+    // and have these setStates trigger upon the response
+    if (user) {
       setLoggedIn(true);
+      setCurrView("create");
+    } else {
+      setLoggedIn(false);
+      setCurrView("login");
     }
-    fetchIndex();
-  }, [loggedIn, setLoggedIn]);
+  }, [loggedIn, setLoggedIn, user, setCurrView]);
 
   return (
     <div id="cms-home">

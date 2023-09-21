@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useContext } from "react";
 import "../styles/cms-login.css";
+import { CmsContext } from "../context/cmsContext";
 
 export const CmsLogin = () => {
-  const [user, setUser] = useState();
+  const { user, setUser } = useContext(CmsContext);
 
   // useEffect(() => {
   //   if (user) {
@@ -49,7 +50,7 @@ export const CmsLogin = () => {
         console.log(result.message);
         return;
       }
-
+      console.log(result);
       setUser(result);
     });
   }

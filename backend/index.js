@@ -3,12 +3,14 @@ const express = require("express");
 const session = require("express-session");
 const cors = require("cors");
 const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const JwtStrategy = require("passport-jwt").Strategy;
+const ExtractJwt = require("passport-jwt").ExtractJwt;
 const mongoose = require("mongoose");
 const User = require("./models/user");
 const postRouter = require("./routes/posts");
 const commentRouter = require("./routes/comments");
 const userRouter = require("./routes/users");
-const jwtStrategy = require("./jwt");
 
 const secretPhrase = process.env.REFRESH_KEY;
 
@@ -26,7 +28,44 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-passport.use(jwtStrategy);
+passport.use(
+  new LocalStrategy(async (username, password, done) => {
+    try {
+      const user = await User.findOne({ username: username });
+      if (!user) {
+        return done(null, false, { message: "Incorrect username" });
+      }
+      if (user.password !== password) {
+        // passwords do not match!
+        return done(null, false, { message: "Incorrect password" });
+      }
+      return done(null, user, {
+        message: "Logged In Successfully",
+      });
+    } catch (err) {
+      return done(err);
+    }
+  })
+);
+
+passport.use(
+  new JwtStrategy(
+    {
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      secretOrKey: process.env.REFRESH_KEY,
+    },
+    async function (jwtPayload, cb) {
+      try {
+        const user = await User.findById(jwtPayload.id);
+        if (user) {
+          return cb(null, user);
+        }
+      } catch (err) {
+        return cb(err);
+      }
+    }
+  )
+);
 
 passport.serializeUser(function (user, done) {
   done(null, user.id);
@@ -48,16 +87,9 @@ app.use(
     saveUninitialized: true,
   })
 );
+app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.get("/api", (req, res, next) => {
-  if (req.user) {
-    return res.json(req.user);
-  }
-
-  return res.json("nouser");
-});
 
 app.use("/api/post", postRouter);
 // app.use("/api/:postId/comments", commentRouter);
