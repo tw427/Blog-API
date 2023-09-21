@@ -95,8 +95,7 @@ exports.user_delete_post = asyncHandler(async (req, res, next) => {
 
   jwt.verify(req.token, process.env.REFRESH_KEY, (err, authData) => {
     if (err) {
-      console.log("hello");
-      res.sendStatus(403);
+      res.sendStatus(403).json({ message: "Verification denied!" });
     } else {
       // await User.findByIdAndRemove(req.params.id);
       return res.status(200).json({
@@ -120,19 +119,17 @@ exports.user_login_post = asyncHandler(async (req, res, next) => {
   ).exec();
 
   if (user === null) {
-    res.statusMessage = "User does not exist!";
-    return res.status(400).json({});
+    return res.status(400).json({ message: "User does not exist!" });
   }
 
   if (password !== user.password) {
-    res.statusMessage = "Incorrect password!";
-    return res.status(400).json({});
+    return res.status(400).json({ message: "Incorrect password!" });
   }
 
   jwt.sign(
     { user: user },
     process.env.REFRESH_KEY,
-    { expiresIn: "1m" },
+    { expiresIn: "60m" },
     (err, token) => {
       if (err) return next(err);
 
