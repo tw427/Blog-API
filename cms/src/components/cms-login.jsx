@@ -3,37 +3,7 @@ import "../styles/cms-login.css";
 import { CmsContext } from "../context/cmsContext";
 
 export const CmsLogin = () => {
-  const { user, setUser } = useContext(CmsContext);
-
-  // useEffect(() => {
-  //   if (user) {
-  //     console.log(user.user.username);
-  //   }
-  // }, [user]);
-
-  async function testToken(e) {
-    e.preventDefault();
-    if (user) {
-      await fetch("http://localhost:3000/api/user/delete", {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          authorization: "Bearer " + user.token,
-        },
-      }).then(async (response) => {
-        const results = await response.json();
-
-        if (response.status !== 200) {
-          console.log(results.message);
-          return;
-        }
-
-        console.log(results.message);
-        return;
-      });
-    }
-    return;
-  }
+  const { setUser } = useContext(CmsContext);
 
   async function loginAPI(event) {
     event.preventDefault();
@@ -75,9 +45,6 @@ export const CmsLogin = () => {
       </label>
       <button type="submit" id="cms-login-btn">
         Login
-      </button>
-      <button id="cms-test-token" onClick={(e) => testToken(e)}>
-        Test Token
       </button>
     </form>
   );

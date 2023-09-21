@@ -94,7 +94,7 @@ exports.user_delete_post = asyncHandler(async (req, res, next) => {
   // }
   jwt.verify(req.token, process.env.REFRESH_KEY, (err, authData) => {
     if (err) {
-      res.sendStatus(403).json({ message: "Verification denied!" });
+      res.status(403).json({ message: "Verification denied!" });
     } else {
       // await User.findByIdAndRemove(req.params.id);
       return res.status(200).json({

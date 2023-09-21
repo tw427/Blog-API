@@ -30,7 +30,7 @@ router.post("/login", function (req, res, next) {
       }
 
       const token = jwt.sign(user.toJSON(), process.env.REFRESH_KEY, {
-        expiresIn: "60m",
+        expiresIn: "10s",
       });
       return res.json({ user, token });
     });
