@@ -109,3 +109,19 @@ exports.user_delete_post = asyncHandler(async (req, res, next) => {
   //   message: "Success! User deleted.",
   // });
 });
+
+exports.user_check_auth = asyncHandler(async (req, res, next) => {
+  jwt.verify(req.token, process.env.REFRESH_KEY, (err, authData) => {
+    if (err) {
+      res
+        .status(403)
+        .json({ message: "Authorization is invalid or has expired!" });
+    } else {
+      // await User.findByIdAndRemove(req.params.id);
+      return res.status(200).json({
+        message: "Authorization valid",
+        authData,
+      });
+    }
+  });
+});

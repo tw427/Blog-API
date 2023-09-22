@@ -14,6 +14,9 @@ const { verifyToken } = require("../../utils/verifyToken");
 // router.get("/delete/:userId");
 router.post("/delete", verifyToken, userController.user_delete_post);
 
+// Verify the authorization of our user
+router.post("/auth", verifyToken, userController.user_check_auth);
+
 // Login
 router.post("/login", function (req, res, next) {
   passport.authenticate("local", { session: false }, (err, user, info) => {
@@ -30,7 +33,7 @@ router.post("/login", function (req, res, next) {
       }
 
       const token = jwt.sign(user.toJSON(), process.env.REFRESH_KEY, {
-        expiresIn: "10s",
+        expiresIn: "60m",
       });
       return res.json({ user, token });
     });
