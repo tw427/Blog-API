@@ -10,6 +10,7 @@ export const CmsNav = (props) => {
 
   function handleClick(btn, currView) {
     setCurrView(`${currView}`);
+    console.log(currView);
     changeBtnState(btn);
   }
 

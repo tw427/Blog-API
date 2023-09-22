@@ -1,21 +1,15 @@
 import { useContext, useEffect } from "react";
 import "../styles/cms-viewall.css";
 import { CmsContext } from "../context/cmsContext";
+import { fetchPosts } from "../../utils/getAllPosts";
 
 export const CmsViewAll = () => {
-  const { allPosts, setAllPosts } = useContext(CmsContext);
+  const { allPosts, setAllPosts, currView } = useContext(CmsContext);
 
   useEffect(() => {
-    async function fetchPosts() {
-      const getPosts = await fetch("http://localhost:3000/api/post/list", {
-        method: "GET",
-        mode: "cors",
-      });
-
-      const results = await getPosts.json();
-      setAllPosts(results);
-    }
-    fetchPosts();
+    (async function () {
+      await fetchPosts(setAllPosts);
+    })();
   }, [setAllPosts]);
 
   function renderPosts() {
@@ -38,8 +32,20 @@ export const CmsViewAll = () => {
           <div className="post-view-body">
             <p>{trimBody}</p>
           </div>
-          <button className="post-link-button">View Post</button>
-          <p>{`${post.published}`}</p>
+          <div className="post-options">
+            {currView === "viewAll" && (
+              <>
+                <button className="post-link-button">View Post</button>
+                <p>{`${post.published}`}</p>
+              </>
+            )}
+            {currView === "delete" && (
+              <button className="post-delete-button">Delete</button>
+            )}
+            {currView === "update" && (
+              <button className="post-update-button">Update</button>
+            )}
+          </div>
         </div>
       );
     });

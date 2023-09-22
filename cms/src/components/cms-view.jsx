@@ -12,7 +12,7 @@ const CmsView = () => {
     <main id="cms-view">
       {currView === "login" && <CmsLogin />}
       {currView === "create" && <CmsCreate />}
-      {currView === "viewAll" && <CmsViewAll />}
+      {["viewAll", "delete", "update"].includes(currView) && <CmsViewAll />}
     </main>
   );
 };
