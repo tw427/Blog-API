@@ -33,3 +33,9 @@ exports.post_create_post = [
     }
   }),
 ];
+
+// Delete a post
+exports.post_delete_post = asyncHandler(async (req, res, next) => {
+  await Post.findByIdAndRemove(req.params.postId);
+  return res.status(200).json({ message: "Post removed success!" });
+});

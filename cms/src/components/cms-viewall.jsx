@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import "../styles/cms-viewall.css";
 import { CmsContext } from "../context/cmsContext";
-import { fetchPosts } from "../../utils/getAllPosts";
+import { fetchPosts, postDelete } from "../../utils/postCrud";
 
 export const CmsViewAll = () => {
   const { allPosts, setAllPosts, currView } = useContext(CmsContext);
@@ -40,7 +40,12 @@ export const CmsViewAll = () => {
               </>
             )}
             {currView === "delete" && (
-              <button className="post-delete-button">Delete</button>
+              <button
+                className="post-delete-button"
+                onClick={() => postDelete(post._id, setAllPosts)}
+              >
+                Delete
+              </button>
             )}
             {currView === "update" && (
               <button className="post-update-button">Update</button>
