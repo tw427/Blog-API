@@ -24,14 +24,11 @@ async function main() {
 }
 
 const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cors());
 
 passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
-      const user = await User.findOne({ username: username });
+      const user = await User.findOne({ username });
       if (!user) {
         return done(null, false, { message: "Incorrect username" });
       }
@@ -56,9 +53,11 @@ passport.use(
     },
     async function (jwtPayload, cb) {
       try {
-        const user = await User.findById(jwtPayload.id);
+        const user = await User.findOne({ id: jwtPayload.sub });
         if (user) {
           return cb(null, user);
+        } else {
+          return null, false;
         }
       } catch (err) {
         return cb(err);
@@ -79,6 +78,10 @@ passport.deserializeUser(async function (id, done) {
     done(err);
   }
 });
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 app.use(
   session({

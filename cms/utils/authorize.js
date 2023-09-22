@@ -13,7 +13,7 @@ export async function AuthCheck(user) {
         return response.status;
       }
 
-      console.log(results.message);
+      console.log(results);
       return response.status;
     });
 

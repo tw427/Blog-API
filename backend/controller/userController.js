@@ -84,32 +84,6 @@ exports.user_create_post = [
   }),
 ];
 
-exports.user_delete_post = asyncHandler(async (req, res, next) => {
-  // const user = await User.findById(req.params.id).exec();
-
-  // if (user === null) {
-  //   return res.status(400).json({
-  //     message: "User does not exist!",
-  //   });
-  // }
-  jwt.verify(req.token, process.env.REFRESH_KEY, (err, authData) => {
-    if (err) {
-      res.status(403).json({ message: "Verification denied!" });
-    } else {
-      // await User.findByIdAndRemove(req.params.id);
-      return res.status(200).json({
-        message: "Success! User deleted.",
-        authData,
-      });
-    }
-  });
-
-  // await User.findByIdAndRemove(req.params.id);
-  // res.status(200).json({
-  //   message: "Success! User deleted.",
-  // });
-});
-
 exports.user_check_auth = asyncHandler(async (req, res, next) => {
   jwt.verify(req.token, process.env.REFRESH_KEY, (err, authData) => {
     if (err) {
@@ -118,8 +92,10 @@ exports.user_check_auth = asyncHandler(async (req, res, next) => {
         .json({ message: "Authorization is invalid or has expired!" });
     } else {
       // await User.findByIdAndRemove(req.params.id);
+      console.log(req.user);
       return res.status(200).json({
         message: "Authorization valid",
+        user: req.user,
         authData,
       });
     }

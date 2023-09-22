@@ -12,10 +12,15 @@ const { verifyToken } = require("../../utils/verifyToken");
 
 // // Delete User
 // router.get("/delete/:userId");
-router.post("/delete", verifyToken, userController.user_delete_post);
+// router.post("/delete", verifyToken, userController.user_delete_post);
 
 // Verify the authorization of our user
-router.post("/auth", verifyToken, userController.user_check_auth);
+router.post(
+  "/auth",
+  passport.authenticate("jwt", { session: false }),
+  verifyToken,
+  userController.user_check_auth
+);
 
 // Login
 router.post("/login", function (req, res, next) {
