@@ -24,8 +24,8 @@ export const CmsViewAll = () => {
     allPosts.forEach((post) => {
       let trimBody = post.body;
       let trimTitle = post.title;
-      if (post.body.length > 123) {
-        trimBody = post.body.substr(0, 123) + "...";
+      if (post.body.length > 40) {
+        trimBody = post.body.substr(0, 40) + "...";
       }
 
       if (post.title.length > 27) {
@@ -35,7 +35,9 @@ export const CmsViewAll = () => {
         <div className="post-view-card" key={post._id}>
           <div className="post-view-title">{trimTitle}</div>
           <hr></hr>
-          <div className="post-view-body">{trimBody}</div>
+          <div className="post-view-body">
+            <p>{trimBody}</p>
+          </div>
           <button className="post-link-button">View Post</button>
           <p>{`${post.published}`}</p>
         </div>

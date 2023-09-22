@@ -27,6 +27,14 @@
   width: 100%;
 }
 
+.post-view-body {
+  min-height: 40px;
+}
+
+.post-view-body p {
+  margin: 0;
+}
+
 .post-link-button {
   height: 38px;
   width: 80px;
