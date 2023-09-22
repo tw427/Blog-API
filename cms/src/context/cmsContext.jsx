@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import { CMS } from "../components/cms";
+import { AuthCheck } from "../../utils/authorize";
 export const CmsContext = createContext();
 
 const CmsContextProvider = () => {
@@ -8,6 +9,8 @@ const CmsContextProvider = () => {
   const [fetchStatus, setFetchStatus] = useState("");
   const [user, setUser] = useState();
   const [loggedIn, setLoggedIn] = useState(false);
+  const tokenVerify = async () =>
+    await AuthCheck(user).then((status) => status);
 
   return (
     <CmsContext.Provider
@@ -22,6 +25,7 @@ const CmsContextProvider = () => {
         setUser: setUser,
         loggedIn: loggedIn,
         setLoggedIn: setLoggedIn,
+        tokenVerify: tokenVerify,
       }}
     >
       <CMS />
