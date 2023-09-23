@@ -34,7 +34,7 @@ const CmsCreate = () => {
           <button id="postBtn" type="submit">
             Post
           </button>
-          <button id="clearBtn">Clear</button>
+          <button id="secondaryBtn">Clear</button>
         </div>
       </form>
     </>

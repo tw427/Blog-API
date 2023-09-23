@@ -39,3 +39,29 @@ exports.post_delete_post = asyncHandler(async (req, res, next) => {
   await Post.findByIdAndRemove(req.params.postId);
   return res.status(200).json({ message: "Post removed success!" });
 });
+
+// Update a post
+exports.post_update_post = [
+  body("postTitle", "Post title required!")
+    .trim()
+    .isLength({ min: 2 })
+    .escape(),
+  body("postBody", "Post body / message required!").trim().isLength({ min: 2 }),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const post = new Post({
+      title: req.body.postTitle,
+      body: req.body.postBody,
+      _id: req.params.postId,
+    });
+
+    if (!errors.isEmpty()) {
+      console.log(errors.array());
+    } else {
+      await Post.findByIdAndUpdate(req.params.postId, post, {});
+      res.status(200).json({ message: "Post successfully modified!" });
+    }
+  }),
+];

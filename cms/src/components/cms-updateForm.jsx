@@ -20,22 +20,17 @@ export const UpdateForm = (props) => {
     const formData = new FormData(document.getElementById("update-form"));
     const data = new URLSearchParams(formData);
 
-    console.log(data);
-    console.log(id);
-    // const response = await fetch(
-    //   `http://localhost:3000/api/post/update/${id}`,
-    //   {
-    //     method: "POST",
-    //     mode: "cors",
-    //     body: data,
-    //   }
-    // ).then((res) => console.log(res));
-
-    // if (response.status === 200) {
-    //   console.log(response);
-    // } else {
-    //   console.log(response);
-    // }
+    await fetch(`http://localhost:3000/api/post/update/${id}`, {
+      method: "POST",
+      mode: "cors",
+      body: data,
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((result) => {
+        setFetchStatus(result.message);
+      });
   }
 
   return (

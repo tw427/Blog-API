@@ -23,7 +23,7 @@ export const FormTemplate = (props) => {
           onChange={(e) =>
             setPost({
               ...post,
-              title: e.textContent,
+              title: e.target.value,
             })
           }
         ></input>
@@ -39,7 +39,7 @@ export const FormTemplate = (props) => {
           onChange={(e) =>
             setPost({
               ...post,
-              body: e.textContent,
+              body: e.target.value,
             })
           }
         ></textarea>

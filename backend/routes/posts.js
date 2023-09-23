@@ -9,8 +9,7 @@ router.post("/create", post_controller.post_create_post);
 router.post("/delete/:postId", post_controller.post_delete_post);
 
 // // Update post
-// router.get("/update/:postId", {});
-// router.post("/update/:postId", {});
+router.post("/update/:postId", post_controller.post_update_post);
 
 // // Get a single post
 // router.get("/:postId", {});
