@@ -2,16 +2,19 @@ import PropTypes from "prop-types";
 import "../styles/cms-nav.css";
 
 export const CmsNav = (props) => {
-  const { setCurrView } = props;
+  const { setCurrView, currView } = props;
 
   CmsNav.propTypes = {
     setCurrView: PropTypes.func,
+    currView: PropTypes.string,
   };
 
-  function handleClick(btn, currView) {
-    setCurrView(`${currView}`);
-    console.log(currView);
-    changeBtnState(btn);
+  function handleClick(btn, newView) {
+    if (currView !== newView) {
+      setCurrView(`${newView}`);
+      changeBtnState(btn);
+    }
+    return;
   }
 
   function changeBtnState(btn) {

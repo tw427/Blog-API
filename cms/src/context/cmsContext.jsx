@@ -9,6 +9,7 @@ const CmsContextProvider = () => {
   const [fetchStatus, setFetchStatus] = useState("");
   const [user, setUser] = useState();
   const [loggedIn, setLoggedIn] = useState(false);
+  const [post, setPost] = useState({});
   const tokenVerify = async () =>
     await AuthCheck(user).then((status) => status);
 
@@ -26,6 +27,8 @@ const CmsContextProvider = () => {
         loggedIn: loggedIn,
         setLoggedIn: setLoggedIn,
         tokenVerify: tokenVerify,
+        post: post,
+        setPost: setPost,
       }}
     >
       <CMS />

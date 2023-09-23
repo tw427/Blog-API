@@ -29,7 +29,7 @@ export const CMS = () => {
   return (
     <div id="cms-home">
       <h1>Blog API CMS</h1>
-      {loggedIn && <CmsNav setCurrView={setCurrView} />}
+      {loggedIn && <CmsNav setCurrView={setCurrView} currView={currView} />}
       <CmsView />
       <button id="cms-test-token" onClick={() => AuthCheck(user)}>
         Test Token

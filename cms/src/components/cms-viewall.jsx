@@ -4,7 +4,8 @@ import { CmsContext } from "../context/cmsContext";
 import { fetchPosts, postDelete } from "../../utils/postCrud";
 
 export const CmsViewAll = () => {
-  const { allPosts, setAllPosts, currView } = useContext(CmsContext);
+  const { allPosts, setAllPosts, currView, setCurrView, setPost } =
+    useContext(CmsContext);
 
   useEffect(() => {
     (async function () {
@@ -48,7 +49,16 @@ export const CmsViewAll = () => {
               </button>
             )}
             {currView === "update" && (
-              <button className="post-update-button">Update</button>
+              <button
+                className="post-update-button"
+                onClick={() => {
+                  setCurrView("updateForm");
+                  setPost(post);
+                  console.log(post);
+                }}
+              >
+                Update
+              </button>
             )}
           </div>
         </div>

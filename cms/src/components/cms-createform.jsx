@@ -1,6 +1,7 @@
-import "../styles/cms-createform.css";
+import "../styles/cms-form-styles.css";
 import { useContext, useEffect } from "react";
 import { CmsContext } from "../context/cmsContext";
+import { FormTemplate } from "./cms-formTemplate";
 
 const CmsCreate = () => {
   const { fetchStatus, setFetchStatus } = useContext(CmsContext);
@@ -28,24 +29,7 @@ const CmsCreate = () => {
     <>
       <span>{fetchStatus}</span>
       <form id="post-form" onSubmit={(e) => createPost(e)}>
-        <label htmlFor="postTitle">
-          <input
-            id="postTitle"
-            name="postTitle"
-            type="text"
-            placeholder="Title of post"
-            minLength={4}
-          ></input>
-        </label>
-        <label htmlFor="postBody">
-          <textarea
-            id="postBody"
-            name="postBody"
-            placeholder="(Max chars. 427)"
-            minLength={4}
-            maxLength={427}
-          ></textarea>
-        </label>
+        <FormTemplate />
         <div id="post-form-btns">
           <button id="postBtn" type="submit">
             Post

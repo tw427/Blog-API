@@ -17,10 +17,10 @@ export const CmsLogin = () => {
       const result = await response.json();
 
       if (response.status !== 200) {
-        console.log(result.message);
+        // console.log(result.message);
         return;
       }
-      console.log(result);
+      // console.log(result);
       setUser(result);
     });
   }
