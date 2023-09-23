@@ -95,7 +95,6 @@ exports.user_check_auth = asyncHandler(async (req, res, next) => {
       console.log(req.user);
       return res.status(200).json({
         message: "Authorization valid",
-        user: req.user,
         authData,
       });
     }

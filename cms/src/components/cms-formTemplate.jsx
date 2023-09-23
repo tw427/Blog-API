@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import PropTypes from "prop-types";
+import { CmsContext } from "../context/cmsContext";
 
 export const FormTemplate = (props) => {
+  const { setPost } = useContext(CmsContext);
   const { post } = props;
 
   FormTemplate.propTypes = {
@@ -17,6 +20,12 @@ export const FormTemplate = (props) => {
           placeholder="Title of post"
           minLength={4}
           value={post && post.title}
+          onChange={(e) =>
+            setPost({
+              ...post,
+              title: e.textContent,
+            })
+          }
         ></input>
       </label>
       <label htmlFor="postBody">
@@ -27,6 +36,12 @@ export const FormTemplate = (props) => {
           minLength={4}
           maxLength={427}
           value={post && post.body}
+          onChange={(e) =>
+            setPost({
+              ...post,
+              body: e.textContent,
+            })
+          }
         ></textarea>
       </label>
     </>
