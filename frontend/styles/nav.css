@@ -1,0 +1,21 @@
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 633px;
+  height: 72px;
+  background-color: rgb(194, 230, 230);
+  margin-bottom: 64px;
+  margin-top: 12px;
+}
+
+nav a {
+  font-size: 24px;
+  font-weight: 600;
+  text-decoration: none;
+  color: black;
+}
+
+nav a:visited {
+  color: rgb(116, 0, 116);
+}
