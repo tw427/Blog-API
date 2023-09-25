@@ -1,0 +1,23 @@
+#view-home {
+  display: grid;
+  grid-template: auto / 1fr 1fr;
+  gap: 20px;
+  background-color: rgb(255, 117, 117);
+  height: auto;
+  width: 933px;
+  padding: 48px;
+}
+
+#left-home, #right-home {
+  display: grid;
+  grid-column: 1fr;
+  gap: 20px;
+}
+
+.left {
+  background-color: rgb(204, 204, 204);
+}
+
+.right {
+  background-color: bisque;
+}
