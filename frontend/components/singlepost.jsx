@@ -7,18 +7,51 @@ export const SinglePost = () => {
   const { postId } = useParams();
   const { allPosts } = useContext(FeContext);
   const uniquePost = allPosts.find((post) => post._id === postId);
-  const postImg = document
-    .getElementById(`${postId}`)
-    .getElementsByTagName("img");
 
   return (
     <>
+      {uniquePost && (
+        <>
+          <img src={uniquePost.image} id="single-post-image"></img>
+          <div id="single-post-title">
+            <p>{uniquePost.title}</p>
+          </div>
+          <div id="single-post-body">
+            <p>{uniquePost.body}</p>
+          </div>
+          {/* Add comments here dynamically from API */}
+          <form
+            method="POST"
+            onSubmit={() => console.log("Add fetch function")}
+            id="comment-form"
+          >
+            <label htmlFor="author">
+              <input
+                name="author"
+                id="author"
+                type="text"
+                placeholder="Author"
+              ></input>
+            </label>
+            <label htmlFor="comment">
+              <textarea
+                id="comment"
+                name="comment"
+                minLength={1}
+                maxLength={255}
+                placeholder="Comment (255 char. max)"
+              ></textarea>
+            </label>
+            <button id="comment-submit" type="submit">
+              Comment
+            </button>
+          </form>
+        </>
+      )}
       <div>
-        <h1>Hello World !</h1>
+        {!uniquePost && <h1>Something went wrong with loading our post!</h1>}
         <p>The post ID is: {postId}</p>
       </div>
-      <img src={postImg[0].src} id="single-post-image"></img>
-      <p>{uniquePost.title}</p>
     </>
   );
 };

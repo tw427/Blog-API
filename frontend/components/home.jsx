@@ -3,10 +3,22 @@ import { Link } from "react-router-dom";
 import { FeContext } from "../src/context/feContext";
 
 export const Home = () => {
-  const blogImg = "../src/assets/blogimg.png";
   const { allPosts, setAllPosts } = useContext(FeContext);
   const [leftPosts, setLeftPosts] = useState([]);
   const [rightPosts, setRightPosts] = useState([]);
+
+  function randomImage(results) {
+    const img1 = "../src/assets/blogimg.png";
+    const img2 = "../src/assets/blogimg2.jpg";
+    const img3 = "../src/assets/blogimg3.png";
+    const images = [img1, img2, img3];
+
+    results.forEach((post) => {
+      post.image = images[Math.floor(Math.random() * 3)];
+    });
+
+    return results;
+  }
 
   async function fetchPostData() {
     const getPosts = await fetch("http://localhost:3000/api/post/list", {
@@ -15,7 +27,8 @@ export const Home = () => {
     });
 
     const results = await getPosts.json();
-    setAllPosts(results);
+    const resultsWithImages = randomImage(results);
+    setAllPosts(resultsWithImages);
     console.log("H");
     return results;
   }
@@ -32,7 +45,7 @@ export const Home = () => {
             <Link className="post-title" to={`post/${post._id}`}>
               {post.title}
             </Link>
-            <img className="post-image" src={blogImg}></img>
+            <img className="post-image" src={post.image}></img>
           </div>
         </div>
       );

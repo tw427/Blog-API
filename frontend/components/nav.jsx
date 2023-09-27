@@ -6,6 +6,7 @@ export const Navbar = () => {
     <>
       <nav>
         {/* React Router here? */}
+        <Link to="/">Home</Link>
         <Link to="post">CMS Login</Link>
       </nav>
       <Outlet />

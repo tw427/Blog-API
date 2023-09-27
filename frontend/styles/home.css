@@ -35,8 +35,8 @@
   margin: 0;
   padding: 10px;
 
-  color: white;
-  background-color: rgba(71, 71, 71, 0.5);
+  color: rgb(255, 255, 255);
+  background-color: rgba(71, 71, 71, 0.6);
 
   min-width: 457px;
   height: 200px;
@@ -45,6 +45,5 @@
 }
 
 .post-title:hover {
-  background-color: rgba(71, 71, 71, 0);
-  color: black;
+  background-color: rgba(71, 71, 71, 0.2);
 }

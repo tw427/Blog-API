@@ -1,3 +1,7 @@
+:root {
+  --single-width: 747px;
+}
+
 body, #root {
   width: 100%;
   margin: 0;
