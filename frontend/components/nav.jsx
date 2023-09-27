@@ -1,12 +1,14 @@
 import "../styles/nav.css";
+import { Link, Outlet } from "react-router-dom";
 
 export const Navbar = () => {
   return (
-    <nav>
-      {/* React Router here? */}
-      <a href="/">Home</a>
-      <a href="/">Full Screen View</a>
-      <a href="/">CMS Login</a>
-    </nav>
+    <>
+      <nav>
+        {/* React Router here? */}
+        <Link to="post">CMS Login</Link>
+      </nav>
+      <Outlet />
+    </>
   );
 };
