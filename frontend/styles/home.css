@@ -10,7 +10,7 @@
   width: 50%;
 }
 
-.left, .right {
+.post {
   margin-bottom: 20px;
 }
 
@@ -28,10 +28,12 @@
 .post-title {
   display: flex;
   justify-content: center;
+  box-sizing: border-box;
 
-  font-size: 48px;
+  font-size: 34px;
   font-weight: 600;
   margin: 0;
+  padding: 10px;
 
   color: white;
   background-color: rgba(71, 71, 71, 0.5);
