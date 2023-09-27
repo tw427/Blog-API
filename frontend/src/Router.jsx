@@ -11,7 +11,7 @@ const Router = () => {
       element: <Navbar />,
       children: [
         { index: true, element: <App /> },
-        { path: "post", element: <SinglePost /> },
+        { path: "post/:postId", element: <SinglePost /> },
       ],
     },
   ]);

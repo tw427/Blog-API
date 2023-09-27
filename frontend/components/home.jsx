@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { FeContext } from "../src/context/feContext";
 
 export const Home = () => {
@@ -26,11 +27,11 @@ export const Home = () => {
 
     allPosts.forEach((post) => {
       posts.push(
-        <div className="post" key={post._id}>
+        <div className="post" key={post._id} id={post._id}>
           <div className="image-container">
-            <p className="post-title" onClick={() => console.log(allPosts)}>
+            <Link className="post-title" to={`post/${post._id}`}>
               {post.title}
-            </p>
+            </Link>
             <img className="post-image" src={blogImg}></img>
           </div>
         </div>
