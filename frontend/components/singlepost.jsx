@@ -7,7 +7,7 @@ export const SinglePost = () => {
   const { postId } = useParams();
   const { allPosts } = useContext(FeContext);
   const uniquePost = allPosts.find((post) => post._id === postId);
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState(uniquePost.comments);
 
   async function postComment(e) {
     e.preventDefault();
@@ -22,6 +22,7 @@ export const SinglePost = () => {
       }
     );
 
+    clearInputs();
     updateComments();
     const result = await response.json();
     return result;
@@ -36,6 +37,14 @@ export const SinglePost = () => {
     const results = await getPosts.json();
     const post = results.find((item) => item._id === postId);
     setComments(post.comments);
+  }
+
+  function clearInputs() {
+    const author = document.getElementById("author");
+    const comment = document.getElementById("comment");
+
+    author.value = "";
+    comment.value = "";
   }
 
   useEffect(() => {
@@ -62,6 +71,7 @@ export const SinglePost = () => {
                 <div className="comment-container" key={comment._id}>
                   <p>{comment.author}</p>
                   <p>{comment.comment}</p>
+                  <p>{comment.time.substring(0, 10)}</p>
                 </div>
               );
             })}
