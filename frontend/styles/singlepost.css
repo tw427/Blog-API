@@ -17,7 +17,9 @@
 }
 
 #single-post-title {
-  font-size: 26px;
+  font-size: 34px;
+  text-align: center;
+  font-weight: 600;
 }
 
 #single-post-body {
@@ -36,8 +38,16 @@
 #comment, #author {
   box-sizing: border-box;
   width: 100%;
+
   margin-bottom: 6px;
-  padding: 6px;
+  padding: 10px;
+
+  border-radius: 10px;
+  border: 1px solid rgb(148, 148, 148);
+}
+
+#comment:focus, #author:focus {
+  outline: none;
 }
 
 #author {
@@ -51,8 +61,24 @@
 }
 
 #comment-submit {
-  font-size: 16px;
-  width: 127px;
-  height: 32px;
   align-self: center;
+  width: 127px;
+  height: 38px;
+  font-size: 18px;
+  font-weight: 600;
+
+  border-radius: 16px;
+  margin-bottom: 32px;
+  margin-top: 10px;
+
+  border: none;
+  color: rgb(35, 149, 255);
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 0px 4px 2px rgb(179, 179, 179);
+}
+
+#comment-submit:hover {
+  cursor: pointer;
+  color: rgb(255, 167, 5);
+  box-shadow: 0px 0px 4px 2px rgb(119, 119, 119);
 }

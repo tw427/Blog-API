@@ -50,7 +50,6 @@ export const SinglePost = () => {
       )}
       <div>
         {!uniquePost && <h1>Something went wrong with loading our post!</h1>}
-        <p>The post ID is: {postId}</p>
       </div>
     </>
   );
