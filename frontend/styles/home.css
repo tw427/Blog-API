@@ -1,6 +1,7 @@
 #view-home {
   display: flex;
   gap: 20px;
+  min-height: 76vh;
   height: auto;
   width: 933px;
   padding: 48px;

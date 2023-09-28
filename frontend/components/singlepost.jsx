@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { FeContext } from "../src/context/feContext";
 import "../styles/singlepost.css";
 
@@ -7,6 +7,7 @@ export const SinglePost = () => {
   const { postId } = useParams();
   const { allPosts } = useContext(FeContext);
   const uniquePost = allPosts.find((post) => post._id === postId);
+  const [comments, setComments] = useState([]);
 
   async function postComment(e) {
     e.preventDefault();
@@ -21,9 +22,12 @@ export const SinglePost = () => {
       }
     );
 
+    setComments(uniquePost.comments);
     const result = await response.json();
     return result;
   }
+
+  useEffect(() => {}, [comments]);
 
   return (
     <>
