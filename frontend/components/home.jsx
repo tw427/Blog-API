@@ -8,7 +8,7 @@ export const Home = () => {
   const [rightPosts, setRightPosts] = useState([]);
 
   function postImages(results) {
-    const img1 = "../src/assets/blogimg.png";
+    const img1 = "../src/assets/blogimg.jpg";
     const img2 = "../src/assets/blogimg2.jpg";
     const img3 = "../src/assets/blogimg3.png";
     const images = [img1, img2, img3];

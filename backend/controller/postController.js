@@ -15,7 +15,7 @@ exports.post_create_post = [
     .trim()
     .isLength({ min: 2 })
     .escape(),
-  body("postBody", "Post body / message required!").trim().isLength({ min: 2 }),
+  body("postBody", "Post body / message required!").trim().isLength({ min: 4 }),
 
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
@@ -23,6 +23,7 @@ exports.post_create_post = [
     const post = new Post({
       title: req.body.postTitle,
       body: req.body.postBody,
+      comments: [],
     });
 
     if (!errors.isEmpty()) {

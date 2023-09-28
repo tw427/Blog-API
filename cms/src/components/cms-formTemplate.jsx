@@ -34,7 +34,7 @@ export const FormTemplate = (props) => {
           name="postBody"
           placeholder="(Max chars. 427)"
           minLength={4}
-          maxLength={427}
+          maxLength={2000}
           value={post && post.body}
           onChange={(e) =>
             setPost({

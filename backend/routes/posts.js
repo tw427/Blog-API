@@ -11,12 +11,7 @@ router.post("/delete/:postId", post_controller.post_delete_post);
 // // Update post
 router.post("/update/:postId", post_controller.post_update_post);
 
-// // Get a single post
-// router.get("/:postId", {});
-// router.post("/:postId", {});
-
 // Get list of posts
 router.get("/list", post_controller.post_list_get);
-// router.post("/list", {});
 
 module.exports = router;

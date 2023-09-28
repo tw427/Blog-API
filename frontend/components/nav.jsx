@@ -7,7 +7,7 @@ export const Navbar = () => {
       <nav>
         {/* React Router here? */}
         <Link to="/">Home</Link>
-        <Link to="post">CMS Login</Link>
+        <Link to="post">CMS</Link>
       </nav>
       <Outlet />
     </>
