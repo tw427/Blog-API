@@ -56,7 +56,15 @@ export const SinglePost = () => {
           <div id="single-post-body">
             <p>{uniquePost.body}</p>
           </div>
-          {/* Add comments here dynamically from API */}
+          {comments &&
+            comments.map((comment) => {
+              return (
+                <div className="comment-container" key={comment._id}>
+                  <p>{comment.author}</p>
+                  <p>{comment.comment}</p>
+                </div>
+              );
+            })}
           <form
             method="POST"
             onSubmit={(e) => postComment(e)}
