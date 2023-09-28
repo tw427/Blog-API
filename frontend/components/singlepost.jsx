@@ -22,19 +22,35 @@ export const SinglePost = () => {
       }
     );
 
-    setComments(uniquePost.comments);
+    updateComments();
     const result = await response.json();
     return result;
   }
 
-  useEffect(() => {}, [comments]);
+  async function updateComments() {
+    const getPosts = await fetch("http://localhost:3000/api/post/list", {
+      method: "GET",
+      mode: "cors",
+    });
+
+    const results = await getPosts.json();
+    const post = results.find((item) => item._id === postId);
+    setComments(post.comments);
+  }
+
+  useEffect(() => {
+    console.log(comments);
+  }, [comments]);
 
   return (
     <>
       {uniquePost && (
         <>
           <img src={uniquePost.image} id="single-post-image"></img>
-          <div id="single-post-title" onClick={() => console.log(uniquePost)}>
+          <div
+            id="single-post-title"
+            onClick={() => console.log(comments, uniquePost)}
+          >
             <p>{uniquePost.title}</p>
           </div>
           <div id="single-post-body">
