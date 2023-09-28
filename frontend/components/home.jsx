@@ -7,14 +7,22 @@ export const Home = () => {
   const [leftPosts, setLeftPosts] = useState([]);
   const [rightPosts, setRightPosts] = useState([]);
 
-  function randomImage(results) {
+  function postImages(results) {
     const img1 = "../src/assets/blogimg.png";
     const img2 = "../src/assets/blogimg2.jpg";
     const img3 = "../src/assets/blogimg3.png";
     const images = [img1, img2, img3];
+    let i = 0;
 
     results.forEach((post) => {
-      post.image = images[Math.floor(Math.random() * 3)];
+      if (i % 3 !== 0) {
+        post.image = images[i];
+        i++;
+      } else {
+        i = 0;
+        post.image = images[i];
+        i++;
+      }
     });
 
     return results;
@@ -27,7 +35,7 @@ export const Home = () => {
     });
 
     const results = await getPosts.json();
-    const resultsWithImages = randomImage(results);
+    const resultsWithImages = postImages(results);
     setAllPosts(resultsWithImages);
     console.log("H");
     return results;
